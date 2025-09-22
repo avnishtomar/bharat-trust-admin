@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { usersAPI } from "../services/api";
+import { usersAPI } from "../../services/endpoints";
 
 export const userKeys = {
-  all: ["users"],
   lists: () => [...userKeys.all, "list"],
   list: (filters) => [...userKeys.lists(), { filters }],
   details: () => [...userKeys.all, "detail"],

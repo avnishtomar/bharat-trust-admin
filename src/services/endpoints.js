@@ -1,4 +1,4 @@
-import { httpClient } from "./api";
+import { httpClient } from "@/services/api";
 
 // API endpoints
 export const usersAPI = {
