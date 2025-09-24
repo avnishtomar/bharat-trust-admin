@@ -1,1 +1,81 @@
+/* For setup theme - https://tailwindcss.com/docs/theme */
+
 @import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  /* Primary Colors */
+  --color-primary: #08a66d;
+  --color-primary-light: #34c98c;
+  --color-primary-dark: #067852;
+  --color-primary-hover: #0a915f;
+  --color-primary-foreground: #ffffff;
+
+  /* Secondary Colors */
+  --color-secondary: #2e3133;
+  --color-secondary-light: #94a3b8;
+  --color-secondary-dark: #475569;
+  --color-secondary-hover: #55677d;
+  --color-secondary-foreground: #ffffff;
+
+  /* Status Colors */
+  --color-success: #22c55e;
+  --color-success-light: #4ade80;
+  --color-success-dark: #15803d;
+  --color-success-foreground: #ffffff;
+
+  --color-warning: #f59e0b;
+  --color-warning-light: #fbbf24;
+  --color-warning-dark: #b45309;
+  --color-warning-foreground: #ffffff;
+
+  --color-danger: #ef4444;
+  --color-danger-light: #f87171;
+  --color-danger-dark: #b91c1c;
+  --color-danger-foreground: #ffffff;
+
+  --color-info: #3b82f6;
+  --color-info-light: #60a5fa;
+  --color-info-dark: #1d4ed8;
+  --color-info-foreground: #ffffff;
+
+  /* Background Colors */
+  --color-background: #f9fafb;
+  --color-background-dark: #111827;
+  --color-background-card: #ffffff;
+  --color-background-muted: #f3f4f6;
+
+  /* Text Colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6b7280;
+  --color-text-inverted: #ffffff;
+
+  /* Border Colors */
+  --color-border: #e5e7eb;
+  --color-border-dark: #374151;
+  --color-border-light: #f3f4f6;
+
+  /* Accent Colors */
+  --color-accent: #0a915f;
+  --color-accent-light: #34c98c;
+  --color-accent-dark: #067852;
+  --color-accent-foreground: #ffffff;
+
+  /* Hover Colors */
+  --color-hover: #0a915f;
+  --color-hover-light: #34c98c;
+  --color-hover-dark: #067852;
+  --color-hover-foreground: #ffffff;
+  /* Custom Spacing */
+  --spacing-72: 18rem;
+  --spacing-84: 21rem;
+  --spacing-96: 24rem;
+
+  /* Custom Border Radius */
+  --radius-xl: 1rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
+}
+
+
