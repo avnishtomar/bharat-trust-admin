@@ -1,8 +1,11 @@
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen.js";
-import { useUserStore } from "@hooks/useUserStore";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMemo } from "react";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+
+import { useUserStore } from "@hooks/useUserStore";
+
+import { routeTree } from "./routeTree.gen.ts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
