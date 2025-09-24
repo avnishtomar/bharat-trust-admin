@@ -21,6 +21,7 @@ const aliases = {
   "@imports": "src/imports",
   "@layouts": "src/layouts",
   "@styles": "src/styles",
+  "@validations": "src/validations",
 };
 
 const resolveAliases = Object.entries(aliases).reduce((acc, [key, value]) => {
