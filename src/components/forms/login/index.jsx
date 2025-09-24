@@ -1,5 +1,6 @@
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
 import { loginSchema } from "@validations/loginSchema";
 
 export const LoginForm = () => {
