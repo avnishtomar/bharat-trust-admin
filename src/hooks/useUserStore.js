@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from "react";
-import userStore, { userActions } from "@store/userStore";
+import userStore, { userActions } from "@/store/userStore";
 
 // Main hook to use the store in components
 export const useUserStore = () => {

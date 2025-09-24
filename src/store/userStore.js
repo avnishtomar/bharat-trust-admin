@@ -1,13 +1,10 @@
-/* eslint-disable no-unused-vars */
-import { createStore } from "@tanstack/store";
+import { Store } from "@tanstack/store";
 
 // Load initial state from localStorage
 const getInitialState = () => {
   try {
     const saved = localStorage.getItem("user-store");
-    if (saved) {
-      return { ...JSON.parse(saved), isLoading: false, error: null };
-    }
+    if (saved) return { ...JSON.parse(saved) };
   } catch (error) {
     console.error("Failed to load saved state:", error);
   }
@@ -15,19 +12,18 @@ const getInitialState = () => {
   return {
     user: null,
     isAuthenticated: false,
-    isLoading: false,
-    error: null,
   };
 };
 
-const userStore = createStore({
-  initialState: getInitialState(),
+const userStore = new Store({
+  ...getInitialState(),
+  // initialState: getInitialState(),
 });
 
 // Save to localStorage on every change
 userStore.subscribe((state) => {
   try {
-    const { isLoading, error, ...toSave } = state;
+    const { ...toSave } = state;
     localStorage.setItem("user-store", JSON.stringify(toSave));
   } catch (error) {
     console.error("Failed to save state:", error);
@@ -39,7 +35,6 @@ export const userActions = {
     userStore.setState({
       user: userData,
       isAuthenticated: !!userData,
-      error: null,
     });
   },
 
@@ -47,16 +42,7 @@ export const userActions = {
     userStore.setState({
       user: null,
       isAuthenticated: false,
-      error: null,
     });
-  },
-
-  setLoading: (isLoading) => {
-    userStore.setState((state) => ({ ...state, isLoading }));
-  },
-
-  setError: (error) => {
-    userStore.setState((state) => ({ ...state, error }));
   },
 
   updateUser: (updates) => {
