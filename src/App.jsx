@@ -1,6 +1,6 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "@/routeTree.gen.js";
-import { useUser } from "@/hooks/useUserStore";
+import { routeTree } from "./routeTree.gen.js";
+import { useUserStore } from "@hooks/useUserStore";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMemo } from "react";
 
@@ -23,13 +23,12 @@ const router = createRouter({
 });
 
 function App() {
-  const auth = useUser();
-  console.log("🚀 ~ App ~ auth:", auth);
-  const routerContext = useMemo(() => ({ auth }), [auth]);
+  const auth = useUserStore();
+  const routerContext = useMemo(() => ({ auth, queryClient }), [auth]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} context={routerContext} />
+      <RouterProvider router={router} context={{ ...routerContext }} />
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );

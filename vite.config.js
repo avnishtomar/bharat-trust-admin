@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const aliases = {
-  "@": "src",
+  // "@": "src",
   "@components": "src/components",
   "@pages": "src/pages",
   "@hooks": "src/hooks",

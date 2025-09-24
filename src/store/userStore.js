@@ -1,10 +1,9 @@
 import { Store } from "@tanstack/store";
 
-// Load initial state from localStorage
 const getInitialState = () => {
   try {
     const saved = localStorage.getItem("user-store");
-    if (saved) return { ...JSON.parse(saved) };
+    if (saved) return JSON.parse(saved);
   } catch (error) {
     console.error("Failed to load saved state:", error);
   }
@@ -15,16 +14,11 @@ const getInitialState = () => {
   };
 };
 
-const userStore = new Store({
-  ...getInitialState(),
-  // initialState: getInitialState(),
-});
+const userStore = new Store(getInitialState());
 
-// Save to localStorage on every change
 userStore.subscribe((state) => {
   try {
-    const { ...toSave } = state;
-    localStorage.setItem("user-store", JSON.stringify(toSave));
+    localStorage.setItem("user-store", JSON.stringify(state.currentVal));
   } catch (error) {
     console.error("Failed to save state:", error);
   }
@@ -39,6 +33,7 @@ export const userActions = {
   },
 
   clearUser: () => {
+    localStorage.removeItem("user-store");
     userStore.setState({
       user: null,
       isAuthenticated: false,
