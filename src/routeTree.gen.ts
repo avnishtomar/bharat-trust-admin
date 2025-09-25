@@ -18,9 +18,14 @@ import { Route as protectedProtectedProfileRouteImport } from './routes/(protect
 import { Route as protectedProtectedDashboardRouteImport } from './routes/(protected)/_protected/dashboard'
 import { Route as authAuthSignupRouteImport } from './routes/(auth)/_auth/signup'
 import { Route as authAuthLoginRouteImport } from './routes/(auth)/_auth/login'
+import { Route as protectedProtectedinnerInnerRouteImport } from './routes/(protected)/_protected/(inner)/_inner'
+import { Route as protectedProtectedinnerInnerTestRouteImport } from './routes/(protected)/_protected/(inner)/_inner/test'
 
 const protectedRouteImport = createFileRoute('/(protected)')()
 const authRouteImport = createFileRoute('/(auth)')()
+const protectedProtectedinnerRouteImport = createFileRoute(
+  '/(protected)/_protected/(inner)',
+)()
 
 const protectedRoute = protectedRouteImport.update({
   id: '/(protected)',
@@ -42,6 +47,10 @@ const protectedProtectedRoute = protectedProtectedRouteImport.update({
 const authAuthRoute = authAuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => authRoute,
+} as any)
+const protectedProtectedinnerRoute = protectedProtectedinnerRouteImport.update({
+  id: '/(inner)',
+  getParentRoute: () => protectedProtectedRoute,
 } as any)
 const protectedProtectedProfileRoute =
   protectedProtectedProfileRouteImport.update({
@@ -65,20 +74,33 @@ const authAuthLoginRoute = authAuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => authAuthRoute,
 } as any)
+const protectedProtectedinnerInnerRoute =
+  protectedProtectedinnerInnerRouteImport.update({
+    id: '/_inner',
+    getParentRoute: () => protectedProtectedinnerRoute,
+  } as any)
+const protectedProtectedinnerInnerTestRoute =
+  protectedProtectedinnerInnerTestRouteImport.update({
+    id: '/test',
+    path: '/test',
+    getParentRoute: () => protectedProtectedinnerInnerRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof protectedProtectedRouteWithChildren
+  '/': typeof protectedProtectedinnerInnerRouteWithChildren
   '/login': typeof authAuthLoginRoute
   '/signup': typeof authAuthSignupRoute
   '/dashboard': typeof protectedProtectedDashboardRoute
   '/profile': typeof protectedProtectedProfileRoute
+  '/test': typeof protectedProtectedinnerInnerTestRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof protectedProtectedRouteWithChildren
+  '/': typeof protectedProtectedinnerInnerRouteWithChildren
   '/login': typeof authAuthLoginRoute
   '/signup': typeof authAuthSignupRoute
   '/dashboard': typeof protectedProtectedDashboardRoute
   '/profile': typeof protectedProtectedProfileRoute
+  '/test': typeof protectedProtectedinnerInnerTestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -91,12 +113,15 @@ export interface FileRoutesById {
   '/(auth)/_auth/signup': typeof authAuthSignupRoute
   '/(protected)/_protected/dashboard': typeof protectedProtectedDashboardRoute
   '/(protected)/_protected/profile': typeof protectedProtectedProfileRoute
+  '/(protected)/_protected/(inner)': typeof protectedProtectedinnerRouteWithChildren
+  '/(protected)/_protected/(inner)/_inner': typeof protectedProtectedinnerInnerRouteWithChildren
+  '/(protected)/_protected/(inner)/_inner/test': typeof protectedProtectedinnerInnerTestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/profile'
+  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/profile' | '/test'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/profile'
+  to: '/' | '/login' | '/signup' | '/dashboard' | '/profile' | '/test'
   id:
     | '__root__'
     | '/'
@@ -108,6 +133,9 @@ export interface FileRouteTypes {
     | '/(auth)/_auth/signup'
     | '/(protected)/_protected/dashboard'
     | '/(protected)/_protected/profile'
+    | '/(protected)/_protected/(inner)'
+    | '/(protected)/_protected/(inner)/_inner'
+    | '/(protected)/_protected/(inner)/_inner/test'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -153,6 +181,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAuthRouteImport
       parentRoute: typeof authRoute
     }
+    '/(protected)/_protected/(inner)': {
+      id: '/(protected)/_protected/(inner)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof protectedProtectedinnerRouteImport
+      parentRoute: typeof protectedProtectedRoute
+    }
     '/(protected)/_protected/profile': {
       id: '/(protected)/_protected/profile'
       path: '/profile'
@@ -181,6 +216,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAuthLoginRouteImport
       parentRoute: typeof authAuthRoute
     }
+    '/(protected)/_protected/(inner)/_inner': {
+      id: '/(protected)/_protected/(inner)/_inner'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof protectedProtectedinnerInnerRouteImport
+      parentRoute: typeof protectedProtectedinnerRoute
+    }
+    '/(protected)/_protected/(inner)/_inner/test': {
+      id: '/(protected)/_protected/(inner)/_inner/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof protectedProtectedinnerInnerTestRouteImport
+      parentRoute: typeof protectedProtectedinnerInnerRoute
+    }
   }
 }
 
@@ -208,14 +257,46 @@ const authRouteChildren: authRouteChildren = {
 
 const authRouteWithChildren = authRoute._addFileChildren(authRouteChildren)
 
+interface protectedProtectedinnerInnerRouteChildren {
+  protectedProtectedinnerInnerTestRoute: typeof protectedProtectedinnerInnerTestRoute
+}
+
+const protectedProtectedinnerInnerRouteChildren: protectedProtectedinnerInnerRouteChildren =
+  {
+    protectedProtectedinnerInnerTestRoute:
+      protectedProtectedinnerInnerTestRoute,
+  }
+
+const protectedProtectedinnerInnerRouteWithChildren =
+  protectedProtectedinnerInnerRoute._addFileChildren(
+    protectedProtectedinnerInnerRouteChildren,
+  )
+
+interface protectedProtectedinnerRouteChildren {
+  protectedProtectedinnerInnerRoute: typeof protectedProtectedinnerInnerRouteWithChildren
+}
+
+const protectedProtectedinnerRouteChildren: protectedProtectedinnerRouteChildren =
+  {
+    protectedProtectedinnerInnerRoute:
+      protectedProtectedinnerInnerRouteWithChildren,
+  }
+
+const protectedProtectedinnerRouteWithChildren =
+  protectedProtectedinnerRoute._addFileChildren(
+    protectedProtectedinnerRouteChildren,
+  )
+
 interface protectedProtectedRouteChildren {
   protectedProtectedDashboardRoute: typeof protectedProtectedDashboardRoute
   protectedProtectedProfileRoute: typeof protectedProtectedProfileRoute
+  protectedProtectedinnerRoute: typeof protectedProtectedinnerRouteWithChildren
 }
 
 const protectedProtectedRouteChildren: protectedProtectedRouteChildren = {
   protectedProtectedDashboardRoute: protectedProtectedDashboardRoute,
   protectedProtectedProfileRoute: protectedProtectedProfileRoute,
+  protectedProtectedinnerRoute: protectedProtectedinnerRouteWithChildren,
 }
 
 const protectedProtectedRouteWithChildren =
