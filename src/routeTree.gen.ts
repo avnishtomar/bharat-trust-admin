@@ -11,21 +11,20 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as protectedProtectedRouteImport } from './routes/(protected)/_protected'
 import { Route as authAuthRouteImport } from './routes/(auth)/_auth'
-import { Route as protectedProtectedProfileRouteImport } from './routes/(protected)/_protected/profile'
-import { Route as protectedProtectedDashboardRouteImport } from './routes/(protected)/_protected/dashboard'
-import { Route as authAuthSignupRouteImport } from './routes/(auth)/_auth/signup'
-import { Route as authAuthLoginRouteImport } from './routes/(auth)/_auth/login'
-import { Route as protectedProtectedinnerInnerRouteImport } from './routes/(protected)/_protected/(inner)/_inner'
-import { Route as protectedProtectedinnerInnerTestRouteImport } from './routes/(protected)/_protected/(inner)/_inner/test'
+import { Route as authAuthIndexRouteImport } from './routes/(auth)/_auth/index'
+import { Route as protectedProtectedRoleIndexRouteImport } from './routes/(protected)/_protected/role/index'
+import { Route as protectedProtectedProfileIndexRouteImport } from './routes/(protected)/_protected/profile/index'
+import { Route as protectedProtectedPermissionIndexRouteImport } from './routes/(protected)/_protected/permission/index'
+import { Route as protectedProtectedDashboardIndexRouteImport } from './routes/(protected)/_protected/dashboard/index'
+import { Route as protectedProtectedRoleEditRouteImport } from './routes/(protected)/_protected/role/edit'
+import { Route as protectedProtectedRoleAddRouteImport } from './routes/(protected)/_protected/role/add'
+import { Route as protectedProtectedPermissionEditRouteImport } from './routes/(protected)/_protected/permission/edit'
+import { Route as protectedProtectedPermissionAddRouteImport } from './routes/(protected)/_protected/permission/add'
 
 const protectedRouteImport = createFileRoute('/(protected)')()
 const authRouteImport = createFileRoute('/(auth)')()
-const protectedProtectedinnerRouteImport = createFileRoute(
-  '/(protected)/_protected/(inner)',
-)()
 
 const protectedRoute = protectedRouteImport.update({
   id: '/(protected)',
@@ -33,11 +32,6 @@ const protectedRoute = protectedRouteImport.update({
 } as any)
 const authRoute = authRouteImport.update({
   id: '/(auth)',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const protectedProtectedRoute = protectedProtectedRouteImport.update({
@@ -48,98 +42,139 @@ const authAuthRoute = authAuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => authRoute,
 } as any)
-const protectedProtectedinnerRoute = protectedProtectedinnerRouteImport.update({
-  id: '/(inner)',
-  getParentRoute: () => protectedProtectedRoute,
-} as any)
-const protectedProtectedProfileRoute =
-  protectedProtectedProfileRouteImport.update({
-    id: '/profile',
-    path: '/profile',
-    getParentRoute: () => protectedProtectedRoute,
-  } as any)
-const protectedProtectedDashboardRoute =
-  protectedProtectedDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => protectedProtectedRoute,
-  } as any)
-const authAuthSignupRoute = authAuthSignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
+const authAuthIndexRoute = authAuthIndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => authAuthRoute,
 } as any)
-const authAuthLoginRoute = authAuthLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => authAuthRoute,
-} as any)
-const protectedProtectedinnerInnerRoute =
-  protectedProtectedinnerInnerRouteImport.update({
-    id: '/_inner',
-    getParentRoute: () => protectedProtectedinnerRoute,
+const protectedProtectedRoleIndexRoute =
+  protectedProtectedRoleIndexRouteImport.update({
+    id: '/role/',
+    path: '/role/',
+    getParentRoute: () => protectedProtectedRoute,
   } as any)
-const protectedProtectedinnerInnerTestRoute =
-  protectedProtectedinnerInnerTestRouteImport.update({
-    id: '/test',
-    path: '/test',
-    getParentRoute: () => protectedProtectedinnerInnerRoute,
+const protectedProtectedProfileIndexRoute =
+  protectedProtectedProfileIndexRouteImport.update({
+    id: '/profile/',
+    path: '/profile/',
+    getParentRoute: () => protectedProtectedRoute,
+  } as any)
+const protectedProtectedPermissionIndexRoute =
+  protectedProtectedPermissionIndexRouteImport.update({
+    id: '/permission/',
+    path: '/permission/',
+    getParentRoute: () => protectedProtectedRoute,
+  } as any)
+const protectedProtectedDashboardIndexRoute =
+  protectedProtectedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => protectedProtectedRoute,
+  } as any)
+const protectedProtectedRoleEditRoute =
+  protectedProtectedRoleEditRouteImport.update({
+    id: '/role/edit',
+    path: '/role/edit',
+    getParentRoute: () => protectedProtectedRoute,
+  } as any)
+const protectedProtectedRoleAddRoute =
+  protectedProtectedRoleAddRouteImport.update({
+    id: '/role/add',
+    path: '/role/add',
+    getParentRoute: () => protectedProtectedRoute,
+  } as any)
+const protectedProtectedPermissionEditRoute =
+  protectedProtectedPermissionEditRouteImport.update({
+    id: '/permission/edit',
+    path: '/permission/edit',
+    getParentRoute: () => protectedProtectedRoute,
+  } as any)
+const protectedProtectedPermissionAddRoute =
+  protectedProtectedPermissionAddRouteImport.update({
+    id: '/permission/add',
+    path: '/permission/add',
+    getParentRoute: () => protectedProtectedRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof protectedProtectedinnerInnerRouteWithChildren
-  '/login': typeof authAuthLoginRoute
-  '/signup': typeof authAuthSignupRoute
-  '/dashboard': typeof protectedProtectedDashboardRoute
-  '/profile': typeof protectedProtectedProfileRoute
-  '/test': typeof protectedProtectedinnerInnerTestRoute
+  '/': typeof authAuthIndexRoute
+  '/permission/add': typeof protectedProtectedPermissionAddRoute
+  '/permission/edit': typeof protectedProtectedPermissionEditRoute
+  '/role/add': typeof protectedProtectedRoleAddRoute
+  '/role/edit': typeof protectedProtectedRoleEditRoute
+  '/dashboard': typeof protectedProtectedDashboardIndexRoute
+  '/permission': typeof protectedProtectedPermissionIndexRoute
+  '/profile': typeof protectedProtectedProfileIndexRoute
+  '/role': typeof protectedProtectedRoleIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof protectedProtectedinnerInnerRouteWithChildren
-  '/login': typeof authAuthLoginRoute
-  '/signup': typeof authAuthSignupRoute
-  '/dashboard': typeof protectedProtectedDashboardRoute
-  '/profile': typeof protectedProtectedProfileRoute
-  '/test': typeof protectedProtectedinnerInnerTestRoute
+  '/': typeof authAuthIndexRoute
+  '/permission/add': typeof protectedProtectedPermissionAddRoute
+  '/permission/edit': typeof protectedProtectedPermissionEditRoute
+  '/role/add': typeof protectedProtectedRoleAddRoute
+  '/role/edit': typeof protectedProtectedRoleEditRoute
+  '/dashboard': typeof protectedProtectedDashboardIndexRoute
+  '/permission': typeof protectedProtectedPermissionIndexRoute
+  '/profile': typeof protectedProtectedProfileIndexRoute
+  '/role': typeof protectedProtectedRoleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/(auth)': typeof authRouteWithChildren
   '/(auth)/_auth': typeof authAuthRouteWithChildren
   '/(protected)': typeof protectedRouteWithChildren
   '/(protected)/_protected': typeof protectedProtectedRouteWithChildren
-  '/(auth)/_auth/login': typeof authAuthLoginRoute
-  '/(auth)/_auth/signup': typeof authAuthSignupRoute
-  '/(protected)/_protected/dashboard': typeof protectedProtectedDashboardRoute
-  '/(protected)/_protected/profile': typeof protectedProtectedProfileRoute
-  '/(protected)/_protected/(inner)': typeof protectedProtectedinnerRouteWithChildren
-  '/(protected)/_protected/(inner)/_inner': typeof protectedProtectedinnerInnerRouteWithChildren
-  '/(protected)/_protected/(inner)/_inner/test': typeof protectedProtectedinnerInnerTestRoute
+  '/(auth)/_auth/': typeof authAuthIndexRoute
+  '/(protected)/_protected/permission/add': typeof protectedProtectedPermissionAddRoute
+  '/(protected)/_protected/permission/edit': typeof protectedProtectedPermissionEditRoute
+  '/(protected)/_protected/role/add': typeof protectedProtectedRoleAddRoute
+  '/(protected)/_protected/role/edit': typeof protectedProtectedRoleEditRoute
+  '/(protected)/_protected/dashboard/': typeof protectedProtectedDashboardIndexRoute
+  '/(protected)/_protected/permission/': typeof protectedProtectedPermissionIndexRoute
+  '/(protected)/_protected/profile/': typeof protectedProtectedProfileIndexRoute
+  '/(protected)/_protected/role/': typeof protectedProtectedRoleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/profile' | '/test'
+  fullPaths:
+    | '/'
+    | '/permission/add'
+    | '/permission/edit'
+    | '/role/add'
+    | '/role/edit'
+    | '/dashboard'
+    | '/permission'
+    | '/profile'
+    | '/role'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/profile' | '/test'
+  to:
+    | '/'
+    | '/permission/add'
+    | '/permission/edit'
+    | '/role/add'
+    | '/role/edit'
+    | '/dashboard'
+    | '/permission'
+    | '/profile'
+    | '/role'
   id:
     | '__root__'
-    | '/'
     | '/(auth)'
     | '/(auth)/_auth'
     | '/(protected)'
     | '/(protected)/_protected'
-    | '/(auth)/_auth/login'
-    | '/(auth)/_auth/signup'
-    | '/(protected)/_protected/dashboard'
-    | '/(protected)/_protected/profile'
-    | '/(protected)/_protected/(inner)'
-    | '/(protected)/_protected/(inner)/_inner'
-    | '/(protected)/_protected/(inner)/_inner/test'
+    | '/(auth)/_auth/'
+    | '/(protected)/_protected/permission/add'
+    | '/(protected)/_protected/permission/edit'
+    | '/(protected)/_protected/role/add'
+    | '/(protected)/_protected/role/edit'
+    | '/(protected)/_protected/dashboard/'
+    | '/(protected)/_protected/permission/'
+    | '/(protected)/_protected/profile/'
+    | '/(protected)/_protected/role/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   authRoute: typeof authRouteWithChildren
   protectedRoute: typeof protectedRouteWithChildren
 }
@@ -160,13 +195,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(protected)/_protected': {
       id: '/(protected)/_protected'
       path: '/'
@@ -181,66 +209,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAuthRouteImport
       parentRoute: typeof authRoute
     }
-    '/(protected)/_protected/(inner)': {
-      id: '/(protected)/_protected/(inner)'
+    '/(auth)/_auth/': {
+      id: '/(auth)/_auth/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof protectedProtectedinnerRouteImport
+      preLoaderRoute: typeof authAuthIndexRouteImport
+      parentRoute: typeof authAuthRoute
+    }
+    '/(protected)/_protected/role/': {
+      id: '/(protected)/_protected/role/'
+      path: '/role'
+      fullPath: '/role'
+      preLoaderRoute: typeof protectedProtectedRoleIndexRouteImport
       parentRoute: typeof protectedProtectedRoute
     }
-    '/(protected)/_protected/profile': {
-      id: '/(protected)/_protected/profile'
+    '/(protected)/_protected/profile/': {
+      id: '/(protected)/_protected/profile/'
       path: '/profile'
       fullPath: '/profile'
-      preLoaderRoute: typeof protectedProtectedProfileRouteImport
+      preLoaderRoute: typeof protectedProtectedProfileIndexRouteImport
       parentRoute: typeof protectedProtectedRoute
     }
-    '/(protected)/_protected/dashboard': {
-      id: '/(protected)/_protected/dashboard'
+    '/(protected)/_protected/permission/': {
+      id: '/(protected)/_protected/permission/'
+      path: '/permission'
+      fullPath: '/permission'
+      preLoaderRoute: typeof protectedProtectedPermissionIndexRouteImport
+      parentRoute: typeof protectedProtectedRoute
+    }
+    '/(protected)/_protected/dashboard/': {
+      id: '/(protected)/_protected/dashboard/'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof protectedProtectedDashboardRouteImport
+      preLoaderRoute: typeof protectedProtectedDashboardIndexRouteImport
       parentRoute: typeof protectedProtectedRoute
     }
-    '/(auth)/_auth/signup': {
-      id: '/(auth)/_auth/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof authAuthSignupRouteImport
-      parentRoute: typeof authAuthRoute
+    '/(protected)/_protected/role/edit': {
+      id: '/(protected)/_protected/role/edit'
+      path: '/role/edit'
+      fullPath: '/role/edit'
+      preLoaderRoute: typeof protectedProtectedRoleEditRouteImport
+      parentRoute: typeof protectedProtectedRoute
     }
-    '/(auth)/_auth/login': {
-      id: '/(auth)/_auth/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof authAuthLoginRouteImport
-      parentRoute: typeof authAuthRoute
+    '/(protected)/_protected/role/add': {
+      id: '/(protected)/_protected/role/add'
+      path: '/role/add'
+      fullPath: '/role/add'
+      preLoaderRoute: typeof protectedProtectedRoleAddRouteImport
+      parentRoute: typeof protectedProtectedRoute
     }
-    '/(protected)/_protected/(inner)/_inner': {
-      id: '/(protected)/_protected/(inner)/_inner'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof protectedProtectedinnerInnerRouteImport
-      parentRoute: typeof protectedProtectedinnerRoute
+    '/(protected)/_protected/permission/edit': {
+      id: '/(protected)/_protected/permission/edit'
+      path: '/permission/edit'
+      fullPath: '/permission/edit'
+      preLoaderRoute: typeof protectedProtectedPermissionEditRouteImport
+      parentRoute: typeof protectedProtectedRoute
     }
-    '/(protected)/_protected/(inner)/_inner/test': {
-      id: '/(protected)/_protected/(inner)/_inner/test'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof protectedProtectedinnerInnerTestRouteImport
-      parentRoute: typeof protectedProtectedinnerInnerRoute
+    '/(protected)/_protected/permission/add': {
+      id: '/(protected)/_protected/permission/add'
+      path: '/permission/add'
+      fullPath: '/permission/add'
+      preLoaderRoute: typeof protectedProtectedPermissionAddRouteImport
+      parentRoute: typeof protectedProtectedRoute
     }
   }
 }
 
 interface authAuthRouteChildren {
-  authAuthLoginRoute: typeof authAuthLoginRoute
-  authAuthSignupRoute: typeof authAuthSignupRoute
+  authAuthIndexRoute: typeof authAuthIndexRoute
 }
 
 const authAuthRouteChildren: authAuthRouteChildren = {
-  authAuthLoginRoute: authAuthLoginRoute,
-  authAuthSignupRoute: authAuthSignupRoute,
+  authAuthIndexRoute: authAuthIndexRoute,
 }
 
 const authAuthRouteWithChildren = authAuthRoute._addFileChildren(
@@ -257,46 +297,27 @@ const authRouteChildren: authRouteChildren = {
 
 const authRouteWithChildren = authRoute._addFileChildren(authRouteChildren)
 
-interface protectedProtectedinnerInnerRouteChildren {
-  protectedProtectedinnerInnerTestRoute: typeof protectedProtectedinnerInnerTestRoute
-}
-
-const protectedProtectedinnerInnerRouteChildren: protectedProtectedinnerInnerRouteChildren =
-  {
-    protectedProtectedinnerInnerTestRoute:
-      protectedProtectedinnerInnerTestRoute,
-  }
-
-const protectedProtectedinnerInnerRouteWithChildren =
-  protectedProtectedinnerInnerRoute._addFileChildren(
-    protectedProtectedinnerInnerRouteChildren,
-  )
-
-interface protectedProtectedinnerRouteChildren {
-  protectedProtectedinnerInnerRoute: typeof protectedProtectedinnerInnerRouteWithChildren
-}
-
-const protectedProtectedinnerRouteChildren: protectedProtectedinnerRouteChildren =
-  {
-    protectedProtectedinnerInnerRoute:
-      protectedProtectedinnerInnerRouteWithChildren,
-  }
-
-const protectedProtectedinnerRouteWithChildren =
-  protectedProtectedinnerRoute._addFileChildren(
-    protectedProtectedinnerRouteChildren,
-  )
-
 interface protectedProtectedRouteChildren {
-  protectedProtectedDashboardRoute: typeof protectedProtectedDashboardRoute
-  protectedProtectedProfileRoute: typeof protectedProtectedProfileRoute
-  protectedProtectedinnerRoute: typeof protectedProtectedinnerRouteWithChildren
+  protectedProtectedPermissionAddRoute: typeof protectedProtectedPermissionAddRoute
+  protectedProtectedPermissionEditRoute: typeof protectedProtectedPermissionEditRoute
+  protectedProtectedRoleAddRoute: typeof protectedProtectedRoleAddRoute
+  protectedProtectedRoleEditRoute: typeof protectedProtectedRoleEditRoute
+  protectedProtectedDashboardIndexRoute: typeof protectedProtectedDashboardIndexRoute
+  protectedProtectedPermissionIndexRoute: typeof protectedProtectedPermissionIndexRoute
+  protectedProtectedProfileIndexRoute: typeof protectedProtectedProfileIndexRoute
+  protectedProtectedRoleIndexRoute: typeof protectedProtectedRoleIndexRoute
 }
 
 const protectedProtectedRouteChildren: protectedProtectedRouteChildren = {
-  protectedProtectedDashboardRoute: protectedProtectedDashboardRoute,
-  protectedProtectedProfileRoute: protectedProtectedProfileRoute,
-  protectedProtectedinnerRoute: protectedProtectedinnerRouteWithChildren,
+  protectedProtectedPermissionAddRoute: protectedProtectedPermissionAddRoute,
+  protectedProtectedPermissionEditRoute: protectedProtectedPermissionEditRoute,
+  protectedProtectedRoleAddRoute: protectedProtectedRoleAddRoute,
+  protectedProtectedRoleEditRoute: protectedProtectedRoleEditRoute,
+  protectedProtectedDashboardIndexRoute: protectedProtectedDashboardIndexRoute,
+  protectedProtectedPermissionIndexRoute:
+    protectedProtectedPermissionIndexRoute,
+  protectedProtectedProfileIndexRoute: protectedProtectedProfileIndexRoute,
+  protectedProtectedRoleIndexRoute: protectedProtectedRoleIndexRoute,
 }
 
 const protectedProtectedRouteWithChildren =
@@ -315,7 +336,6 @@ const protectedRouteWithChildren = protectedRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   authRoute: authRouteWithChildren,
   protectedRoute: protectedRouteWithChildren,
 }
