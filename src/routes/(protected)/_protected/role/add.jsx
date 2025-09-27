@@ -1,10 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'  
-import { RoleAdd } from '@imports/pages'
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/(protected)/_protected/role/add')({
+import { RoleAdd } from "@imports/pages";
+
+export const Route = createFileRoute("/(protected)/_protected/role/add")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <RoleAdd />
+  return <RoleAdd />;
 }
